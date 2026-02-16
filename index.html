@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio — M. Haikal Albeni</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #0d1b2a;
+            color: #e0e6ed;
+        }
+
+        /* === FULL PAGE ANIMATION BACKGROUND === */
+        #nnCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.62;
+
+            /* ✅ biar scroll di HP gak “nganggu” canvas */
+            pointer-events: none;
+            touch-action: none;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #e0e6ed;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            color: #84caff;
+        }
+
+        /* === BRAND BOX (BINGKAI NAMA) === */
+        .brand-box{
+            display:inline-block;
+            padding: 10px 16px;
+            border: 2px solid rgba(0,255,255,0.95);
+            border-radius: 0px;
+            color: #e0e6ed;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            background: rgba(0,255,255,0.06);
+
+            box-shadow:
+              0 0 10px rgba(0,255,255,0.35),
+              0 0 22px rgba(0,255,255,0.18);
+            transition: 0.25s;
+        }
+
+        .brand-box:hover{
+            box-shadow:
+              0 0 14px rgba(0,255,255,0.55),
+              0 0 30px rgba(0,255,255,0.25);
+            transform: translateY(-1px);
+        }
+
+        /* === NAV BOX (BINGKAI MENU) === */
+        .nav-box{
+            display: inline-block;
+            margin-left: 14px;
+            padding: 8px 14px;
+            border: 2px solid rgba(0,255,255,0.85);
+            border-radius: 0px;
+            color: #e0e6ed;
+            font-weight: 700;
+            background: rgba(0,255,255,0.04);
+
+            box-shadow:
+              0 0 8px rgba(0,255,255,0.25),
+              0 0 18px rgba(0,255,255,0.12);
+            transition: 0.25s;
+        }
+
+        .nav-box:hover{
+            color: #ffffff;
+            transform: translateY(-2px);
+            background: rgba(0,255,255,0.07);
+            box-shadow:
+              0 0 12px rgba(0,255,255,0.55),
+              0 0 26px rgba(0,255,255,0.22);
+        }
+
+        .nav-box:active{
+            transform: translateY(0px);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            position: relative;
+            padding: 160px 0 130px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 650px;
+            margin: 20px auto;
+            opacity: 0.85;
+        }
+
+        section {
+            margin-top: 120px;
+            padding: 60px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 20px;
+        }
+
+        section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+        }
+
+        .skill-item {
+            padding: 18px;
+            border-radius: 14px;
+            text-align: center;
+            background: rgba(255,255,255,0.08);
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .skill-item:hover {
+            background: rgba(255,255,255,0.18);
+            transform: translateY(-6px);
+        }
+
+        /* PROJECTS */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 26px;
+        }
+
+        .project-card {
+            padding: 22px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.08);
+            transition: 0.3s;
+        }
+
+        .project-card:hover {
+            background: rgba(255,255,255,0.16);
+            transform: translateY(-8px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 0;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+
+<canvas id="nnCanvas"></canvas>
+
+<!-- NAV -->
+<div class="container">
+    <nav>
+        <h2 style="margin:0;">
+            <span class="brand-box">Mochamad Haikal Albeni</span>
+        </h2>
+        <div>
+            <a class="nav-box" href="#tentang" data-target="tentang">Tentang</a>
+            <a class="nav-box" href="#skills" data-target="skills">Skills</a>
+            <a class="nav-box" href="#projects" data-target="projects">Projects</a>
+            <a class="nav-box" href="#kontak" data-target="kontak">Kontak</a>
+        </div>
+    </nav>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <h1>Data Enthusiast</h1>
+        <p>Mahasiswa Statistika dengan minat pada analisis data, machine learning, dan automasi berbasis Python.</p>
+    </div>
+</section>
+
+<!-- TENTANG -->
+<div class="container">
+    <section id="tentang">
+        <h2>Tentang Saya</h2>
+        <p>
+            Saya memiliki ketertarikan kuat pada Data Engineering dan Data Science. Berpengalaman dalam analisis data,
+            pemodelan statistik, time series, machine learning, hingga web automation menggunakan Selenium.
+        </p>
+    </section>
+</div>
+
+<!-- SKILLS -->
+<div class="container">
+    <section id="skills">
+        <h2>Skills</h2>
+
+        <div class="skills-grid">
+            <div class="skill-item">Python</div>
+            <div class="skill-item">SQL</div>
+            <div class="skill-item">Machine Learning</div>
+            <div class="skill-item">Data Visualization</div>
+            <div class="skill-item">Selenium Automation</div>
+            <div class="skill-item">ETL Pipeline</div>
+        </div>
+    </section>
+</div>
+
+<!-- PROJECTS -->
+<div class="container">
+    <section id="projects">
+        <h2>Projects</h2>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Forecasting Time Series</h3>
+                <p>Peramalan data menggunakan ARIMA, Prophet, dan LSTM.</p>
+            </div>
+
+            <div class="project-card">
+                <h3>Web Automation</h3>
+                <p>Scraping dan otomatisasi form menggunakan Python Selenium.</p>
+            </div>
+
+            <div class="project-card">
+                <h3>Machine Learning Classification</h3>
+                <p>Membangun model ML untuk klasifikasi data dengan akurasi tinggi.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- KONTAK -->
+<div class="container">
+    <section id="kontak">
+        <h2>Kontak</h2>
+        <p>Email: haikalalbeni@gmail.com<br>
+        LinkedIn: linkedin.com/in/haikalalbeni<br>
+        GitHub: github.com/haikalalbeni </p>
+    </section>
+</div>
+
+<footer>
+    © 2025 Mochamad Haikal Albeni — Portfolio
+</footer>
+
+<script>
+/* =======================
+   FULL PAGE ANIMATION (DENSITY RESPONSIVE)
+   ======================= */
+
+const canvas = document.getElementById("nnCanvas");
+const ctx = canvas.getContext("2d", { alpha: true });
+
+let nodes = [];
+let NODE_COUNT = 85;
+let LINK_DIST = 200;
+let LINK_DIST2 = LINK_DIST * LINK_DIST;
+let MAX_LINKS_PER_NODE = 10;
+
+const NEON = "0,255,255";
+const SPEED_PPS = 55; // 45-75
+
+function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+function initNodes(reset = false) {
+  if (reset || nodes.length !== NODE_COUNT) {
+    nodes = [];
+    for (let i = 0; i < NODE_COUNT; i++) {
+      nodes.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        vx: (Math.random() - 0.5) * SPEED_PPS,
+        vy: (Math.random() - 0.5) * SPEED_PPS
+      });
+    }
+  }
+}
+
+function resizeCanvas() {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  canvas.width = Math.floor(window.innerWidth * dpr);
+  canvas.height = Math.floor(window.innerHeight * dpr);
+
+  canvas.style.width = window.innerWidth + "px";
+  canvas.style.height = window.innerHeight + "px";
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  // ✅ density: konsisten di HP & laptop
+  const area = window.innerWidth * window.innerHeight;
+
+  NODE_COUNT = clamp(Math.round(area / 14000), 70, 160);
+
+  LINK_DIST = clamp(
+    Math.round(Math.min(window.innerWidth, window.innerHeight) * 0.30),
+    150,
+    260
+  );
+  LINK_DIST2 = LINK_DIST * LINK_DIST;
+
+  MAX_LINKS_PER_NODE = clamp(Math.round(NODE_COUNT / 10), 8, 14);
+
+  initNodes(true);
+}
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+let lastTime = performance.now();
+
+function animate(now) {
+  const dt = Math.min(0.033, (now - lastTime) / 1000);
+  lastTime = now;
+
+  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+  // nodes
+  for (let i = 0; i < NODE_COUNT; i++) {
+    const n = nodes[i];
+
+    n.x += n.vx * dt;
+    n.y += n.vy * dt;
+
+    if (n.x < 0) { n.x = 0; n.vx *= -1; }
+    if (n.x > window.innerWidth) { n.x = window.innerWidth; n.vx *= -1; }
+    if (n.y < 0) { n.y = 0; n.vy *= -1; }
+    if (n.y > window.innerHeight) { n.y = window.innerHeight; n.vy *= -1; }
+
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, 3.2, 0, Math.PI * 2);
+    ctx.shadowColor = `rgba(${NEON},1)`;
+    ctx.shadowBlur = 18;
+    ctx.fillStyle = `rgba(${NEON},1)`;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+
+  // links
+  for (let i = 0; i < NODE_COUNT; i++) {
+    let links = 0;
+
+    for (let j = i + 1; j < NODE_COUNT; j++) {
+      const dx = nodes[i].x - nodes[j].x;
+      const dy = nodes[i].y - nodes[j].y;
+      const dist2 = dx * dx + dy * dy;
+
+      if (dist2 < LINK_DIST2) {
+        const dist = Math.sqrt(dist2);
+        const alpha = Math.min(1, (1 - dist / LINK_DIST) * 1.25);
+
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.strokeStyle = `rgba(${NEON},${alpha})`;
+        ctx.lineWidth = 1.15;
+        ctx.stroke();
+
+        links++;
+        if (links >= MAX_LINKS_PER_NODE) break;
+      }
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
+requestAnimationFrame(animate);
+</script>
+
+<script>
+/* =======================
+   NAV CLICK -> SECTION CENTER
+   ======================= */
+
+function scrollSectionToCenter(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  const rect = el.getBoundingClientRect();
+  const currentY = window.pageYOffset;
+  const elTop = rect.top + currentY;
+
+  const elHeight = el.offsetHeight;
+  const viewportHeight = window.innerHeight;
+
+  const targetY = elTop - (viewportHeight / 2) + (elHeight / 2);
+
+  window.scrollTo({
+    top: Math.max(0, targetY),
+    behavior: "smooth"
+  });
+}
+
+document.querySelectorAll('a.nav-box[data-target]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const id = link.getAttribute('data-target');
+    scrollSectionToCenter(id);
+    history.replaceState(null, "", "#" + id);
+  });
+});
+</script>
+
+</body>
+</html>
